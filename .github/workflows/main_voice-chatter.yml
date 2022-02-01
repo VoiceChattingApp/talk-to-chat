@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'voice-chatter'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_07D35EEB8637412495DC20732BA83D91 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3BC75C9CAB904A998B9CB142F3B9A925 }}
           package: .
