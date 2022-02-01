@@ -49,33 +49,21 @@ const  Newuserprofile=(props)=>{
 }
   
 	return (
-		<div className={classes.card}>
-
-    <div className={classes['profile-pic-div']}>
-  <img src={image} className={classes.photo}/>
-  <input type="file" accept="image/*" name="image-upload" id="input" onChange={imageHandler} />
+		<div className={classes.page}>
+        <div className={classes.container}>
+          <h1 className={classes.heading}>Add your Image</h1>
+          <div className={classes['img-holder']}>
+            <img src={image} alt="" id="img" className={classes.img} />
+          </div>
+          <input type="file" accept="image/*" name="image-upload" id="input" onChange={imageHandler} />
           <div className={classes.label}>
           <label className={classes['image-upload']} htmlFor="input">
-            <i className="material-icons">add_photo_alternate</i>
+            <i className={classes['material-icons']}>add_photo_alternate</i>
             Choose your Photo
           </label>
           </div>
-</div>
-
-  <div className={classes['card-background']}>
-   <img src="https://lh3.googleusercontent.com/-paS9Qm_3L9E/XGK6C0wkWbI/AAAAAAAAAyg/sqwN0ovgb4oD-8cmkNYhLY67SvWZSAnbQCLcBGAs/h120/askjd.jpg" className={classes['card-image']} />
-  </div>
-
-  <div className={classes['card-info']}>
-   
-    <h1>{props.user.firstName}{' '}{props.user.lastName}</h1>
-    <p>Demi Lovato is a Grammy nominated and multi-platinum singer, songwriter, actress</p>
-</div>
-  
-  {props.curindex===-2&&<button className={"buttonflex"} onClick={submithandler}>ADD USER TO CONTACTS</button>}
-
-
-</div>
+        </div>
+      </div>
 	)
 }
 

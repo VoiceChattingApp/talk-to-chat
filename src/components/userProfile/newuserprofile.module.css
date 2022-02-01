@@ -1,14 +1,40 @@
+page{
+  height: 100vh;
+  background-color: #512da8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.profile-pic-div{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid grey;
+}
+.container{
+  height: 300px;
+  width: 300px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  
+}
+.heading{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 1rem;
+  font-weight: bold;
+
+}
+.img-holder{
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  border: 3px black solid;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+.img{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+#input[type="file"] {
+	display: none;
 }
 .label{
   width: 100%;
@@ -25,81 +51,4 @@
   background-color: black;
   text-align: center;
   cursor: pointer;
-}
-.photo{
-    height: 100%;
-    width: 100%;
-}
-
-.file{
-    }
-
-.uploadBtn{
-    height: 40px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    background: rgba(0, 0, 0, 0.7);
-    color: wheat;
-    line-height: 30px;
-    font-family: sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    
-}
-.card{
- background-color: #f4f3f3;
- 
- height: 80%;
- max-width: 40%;
- min-width: 40%;
- margin-top: 10px;
- text-align: center;
- margin-left: auto;
- margin-right: auto;
- border-radius: 10px;
-}
-
-.card-background{
- background: linear-gradient(to right, #009688, #4CAF50);
- 
- width: 100%;
- border-top-left-radius: 10px;
- border-top-right-radius: 10px;
-}
-
-.card-image{
- border-radius: 50%;
- width: 120px;
- height: auto;
- position: relative;
- top: 100px;
- border: 6px solid #f4f3f3;
-}
-
-.card-info{
- margin-top: 80px;
- padding: 10px;
-}
-
-.fab{
- color: grey;
- font-size: 24px;
- margin: 15px;
- cursor: pointer;
-}
-
-.fab:hover{
- color: #524b4b;
-}
-
-.card h1{
- color: #009688; 
-}
-
-.card p{
- color: grey;
 }
