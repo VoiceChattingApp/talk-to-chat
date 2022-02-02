@@ -15,7 +15,7 @@ const  Newuserprofile=(props)=>{
     
     props.updatecontacts(props.user);
   }
-  const [image,setimage]=useState("https://lh3.googleusercontent.com/-paS9Qm_3L9E/XGK6C0wkWbI/AAAAAAAAAyg/sqwN0ovgb4oD-8cmkNYhLY67SvWZSAnbQCLcBGAs/h120/askjd.jpg");
+  const [image,setimage]=useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
 
   const imageHandler = (e) => {
     const reader = new FileReader();
@@ -49,21 +49,48 @@ const  Newuserprofile=(props)=>{
 }
   
 	return (
-		<div className={classes.page}>
-        <div className={classes.container}>
-          <h1 className={classes.heading}>Add your Image</h1>
-          <div className={classes['img-holder']}>
-            <img src={image} alt="" id="img" className={classes.img} />
-          </div>
-          <input type="file" accept="image/*" name="image-upload" id="input" onChange={imageHandler} />
+
+<div className={`${props.curindex===-3? classes.minheight:" "}`}>
+      <div className={`${props.curindex===-3? classes.cardmargin:classes.card}`}>
+
+      <div className={`${props.curindex===-3? classes['card-background-margin']:classes['card-background']}`}>
+
+
+  
+          <div className={classes['img-holder']} style={{  
+  backgroundImage: `url(${image})`,
+
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat'
+}}>
+            
+          
+          <input type="file" accept="image/*" name="image-upload" id="input" onChange={imageHandler} className={classes.nodisplay}/>
           <div className={classes.label}>
           <label className={classes['image-upload']} htmlFor="input">
-            <i className={classes['material-icons']}>add_photo_alternate</i>
-            Choose your Photo
+            <i className={classes['material-icons']}>Add_photo</i>
+           
           </label>
           </div>
-        </div>
-      </div>
+       </div>
+       </div>
+
+  <div className={`${props.curindex===-3? classes['card-info-margin']:classes['card-info']}`}>
+   
+    <h1>{props.user.firstName}{' '}{props.user.lastName}</h1>
+    <p>Demi Lovato is a Grammy nominated and multi-platinum singer, songwriter, actress</p>
+</div>
+  
+  {props.curindex===-2&&<button className={classes.buttonflex} onClick={submithandler}>ADD TO CONTACTS</button>}
+
+
+
+
+
+		
+
+</div>
+</div>
 	)
 }
 

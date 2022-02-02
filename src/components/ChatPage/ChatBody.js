@@ -52,7 +52,7 @@ const ChatBody=()=> {
 	<div className={classes.main__chatbody}>
         <ListofContacts setindexwithname={setindexwithname} updatecontacts={updatecontacts} adduserindex={setuserindex} setpersonfunc={setpersonfunc} curindex={index} setemailfunc={setemailfunc} setindexfunc={setindexfunc}/>
         {index===-1&&<Logout />}
-        {index===-3&&<Newuserprofile curindex={index} user={indexwithname}/>}
+        {index===-3&&<Newuserprofile curindex={index} user={indexwithname} />}
         
         {index!==-1&&index!==-2&&index!==-3&&<ChatContent setindexfunc={setindexfunc} nameofperson={nameofperson} email={email} index={index}/>}
         {index===-2&&<Adduser curindex={index} setindexfunc={setindexfunc} setupdatecontacts={setupdatecontacts}/>}

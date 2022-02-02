@@ -249,7 +249,7 @@ progress: undefined,
         />
 
       
-        <PushToTalkButton intro="PUSH TO TALK" tapToTalkTime="60000" size="2.5rem" />
+        <PushToTalkButton intro="" tapToTalkTime="60000" size="2.5rem" />
         
         
         <button className={classes.btnSendMsg} id="sendMsgBtn" onClick={sendMessage}>

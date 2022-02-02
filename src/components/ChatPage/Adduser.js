@@ -104,7 +104,7 @@ progress: undefined,
           <div className={classes.search_wrap}>
             <input type="email" placeholder="Search Here" value={searchval} onChange={setsearchvalfunc} required /> 
             <button className={classes.searchbtn} onClick={submithandler}>
-              <i className="fa fa-search"></i>
+              <i className="fa fa-search" style={{color:"white"}}></i>
             </button>
           </div>
         </div>

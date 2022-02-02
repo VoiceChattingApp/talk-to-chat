@@ -1,13 +1,13 @@
 .main__chatlist {
   border-right: 1px solid #ebe7fb;
-  padding: 0 40px 0 0px;
+  padding: 0 15px 0 0px;
   min-width: 25%;
   max-width: 30%;
   color: white;
 }
 .chatlist__heading {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: white;
 }
@@ -28,20 +28,22 @@
   outline: none;
 }
 .search_wrap {
-  background-color: #e6e5ea;
+  background-color: transparent;
   border-radius: 50px;
   color: white;
   border:3px solid #32e17c;
 }
 .search_wrap input {
   background-color: transparent;
-  
+  color: white;
+  font-size: medium;
   border-radius: 50px;
   padding: 10px 10px;
   outline: none;
   width: 80%;
   padding-right: 0;
- 
+  padding-left:20px;
+  padding-bottom: 15px;
   border:none;
 }
 .searchbtn {

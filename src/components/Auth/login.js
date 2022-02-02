@@ -5,7 +5,9 @@ import { useHistory } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 import classes from "./login.module.css";
 import { loggedInUser } from "../../atom/globalState";
+import { ToastContainer, toast } from 'react-toastify';
 
+  import 'react-toastify/dist/ReactToastify.css';
 import "font-awesome/css/font-awesome.min.css";
 const Login = () => {
   const [login, setlogin] = useState(false);
@@ -40,15 +42,29 @@ const Login = () => {
     axios
       .post("https://chat-lg.azurewebsites.net/register", userData)
       .then((response) => {
-        
-        window.alert(
-          "User created successfully!!! Check your email to verify your email address"
-        );
+        toast.success('User created successfully!!! Check your email to verify your email address', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+       
         setLoading(false);
       })
       .catch((err) => {
+        toast.error('Error in creating user', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
         
-        window.alert("Error in creating user");
         setLoading(false);
       });
   };
@@ -68,12 +84,30 @@ const Login = () => {
         
         localStorage.setItem("token", response.data.token);
         setCurrentUser(response.data.user);
+         toast.success('Successfully Logged In', {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+       
         setLoading(false);
         history.replace("/chatpage");
       })
       .catch((err) => {
+        toast.error('Invalid username or password!', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
         
-        window.alert("Invalid username or password!");
         setLoading(false);
       });
   };

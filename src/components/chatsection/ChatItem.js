@@ -62,7 +62,7 @@ const ChatItem=(props)=> {
     {
       mainhours+=hours.toString();
     } 
-
+    console.log(props.user);
     return (
       <div className={`${classes.chat__item} ${props.sender!==props.currentUser? classes.other:" "}`}>
         <div className={classes.chat__item__content}>
@@ -70,21 +70,21 @@ const ChatItem=(props)=> {
           {props.msg}
          
           </div>
-          <div className={classes.chat__meta}>
+          <div className={`${props.sender===props.currentUser?classes.chat__meta:classes.chat__meta__other}`}>
           {isNaN(props.timestamp.toString().charAt(0))===false&&<div style={{marginRight:"5px"}}>{mainhours}:{yp}</div>}
             {isNaN(props.timestamp.toString().charAt(0))===false&&<div>{props.timestamp.toString().substr(8,2)}{' '}{monthname}{' '}{props.timestamp.toString().substr(0,4)}</div>}
             
-            
-            {
-              isNaN(props.timestamp.toString().charAt(0))===true&&
-            <span>{props.timestamp.toString().substr(3,13)}</span>
-            
-            }
              {
               isNaN(props.timestamp.toString().charAt(0))===true&&
-               <span>&nbsp;&nbsp;&nbsp;{props.timestamp.toString().substr(16,5)}</span>
+               <div>{props.timestamp.toString().substr(16,5)}</div>
             
             }
+            {
+              isNaN(props.timestamp.toString().charAt(0))===true&&
+            <div>&nbsp;{props.timestamp.toString().substr(3,13)}</div>
+            
+            }
+            
            
 
             

@@ -6,7 +6,7 @@ const NoUserProfile=()=>{
   <div className={classes.TextHolder}>
     <div className={classes.Texts}>
       <div className={classes.FourOhFour}>404</div>
-      <div className={classes.Maybe}>GUH.. Maybe.. We have PROBLEMS HERE </div>
+      <div className={classes.Maybe}>GUH.. Maybe.. You Entered Wrong Address</div>
       <div className={classes.Bad}>This User couldn't be found.</div>
       
     </div>
