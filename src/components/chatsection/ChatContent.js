@@ -90,7 +90,7 @@ const ChatContent = (props) => {
     );
   };
   const onError = (err) => {
-    window.alert("YES");
+    
     
   };
   const changeinstate = (e) => {
