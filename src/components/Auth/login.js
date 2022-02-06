@@ -42,7 +42,6 @@ const Login = () => {
     axios
       .post("https://chat-lg.azurewebsites.net/register", userData)
       .then((response) => {
-<<<<<<< HEAD
         toast.success('User created successfully!!! Check your email to verify your email address', {
 position: "top-center",
 autoClose: 2000,
@@ -66,34 +65,6 @@ draggable: true,
 progress: undefined,
 });
         
-=======
-        toast.success(
-          "User created successfully!!! Check your email to verify your email address",
-          {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error("Error in creating user", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-
->>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
         setLoading(false);
       });
   };
@@ -128,7 +99,6 @@ progress: undefined,
         history.replace("/chatpage");
       })
       .catch((err) => {
-<<<<<<< HEAD
         toast.error('Invalid username or password!', {
 position: "top-center",
 autoClose: 2000,
@@ -139,18 +109,6 @@ draggable: true,
 progress: undefined,
 });
         
-=======
-        toast.error("Invalid username or password!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-
->>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
         setLoading(false);
       });
   };
