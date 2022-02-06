@@ -15,7 +15,7 @@ const allChatUsers = [];
 const ChatList = (props) => {
   const authCtx = useContext(AuthContext);
   const currentUser = useRecoilValue(loggedInUser);
-<<<<<<< HEAD
+
  
   const [allChats,setallChats]=useState(allChatUsers);
   const [deleteuserid,setdeleteuserid]=useState(-1);
@@ -23,13 +23,6 @@ const ChatList = (props) => {
    const loadContacts = () => {
     console.log("load");
     console.log(currentUser);
-=======
-
-  const [allChats, setallChats] = useState(allChatUsers);
-  const [deleteuserid, setdeleteuserid] = useState(-1);
-  const [searchval, setsearchval] = useState("");
-  const loadContacts = () => {
->>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
     axios
       .get(
         "https://chat-lg.azurewebsites.net/contacts/" + currentUser.username,
@@ -54,7 +47,7 @@ const ChatList = (props) => {
   };
   const addnewuser = () => {
     props.adduserindex();
-<<<<<<< HEAD
+
   }
  const setempty=()=>
  {
@@ -81,47 +74,7 @@ const ChatList = (props) => {
     axios
       .post("https://chat-lg.azurewebsites.net/contacts/"+currentUser.username,props.updatecontacts)
       .then((response) => {
-        
-      
-=======
-  };
 
-  useEffect(() => {
-    if (props.updatecontacts.username.length > 0) {
-      var j = 0;
-      for (var i = 0; i < allChats.length; i++) {
-        if (allChats[i].username === props.updatecontacts.username) {
-          j = 1;
-          break;
-        }
-      }
-
-      //paste the func of adding to the database the props.updateuser and the call loadcontacts();
-      if (j === 0) {
-        axios
-          .post(
-            "https://chat-lg.azurewebsites.net/contacts/" +
-              currentUser.username,
-            props.updatecontacts
-          )
-          .then((response) => {
-            props.setindexfunc(-1);
-            loadContacts();
-          })
-          .catch((err) => {
-            window.alert(err.message);
-          });
-      } else {
-        toast.error("User Already Exists In Contact", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
->>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
         props.setindexfunc(-1);
       }
     }
@@ -129,7 +82,7 @@ const ChatList = (props) => {
   useEffect(() => {
     if (deleteuserid != -1) {
     }
-<<<<<<< HEAD
+
     },[props.updatecontacts]);
  useEffect(()=>{
    if(deleteuserid!=-1)
@@ -185,29 +138,7 @@ const ChatList = (props) => {
             );
           })}
 
-=======
-  }, [deleteuserid]);
-  return (
-    <div className={classes.main__chatlist}>
-      <button className={classes.btn} onClick={addnewuser}>
-        <i className="fa fa-plus"></i>
-        <span>Add New Contact</span>
-      </button>
-      <div className={classes.chatlist__heading}>
-        <h2>List of Contacts</h2>
-      </div>
-      <div className={classes.chatList__search}>
-        <div className={classes.search_wrap}>
-          <input
-            type="text"
-            placeholder="Search Here"
-            onChange={setsearchvalfunc}
-            required
-          />
-          <button className={classes.searchbtn}>
-            <i className="fa fa-search"></i>
-          </button>
->>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
+
         </div>
       </div>
       <div className={classes.chatlist__items}>
