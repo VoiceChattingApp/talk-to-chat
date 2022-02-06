@@ -1,55 +1,66 @@
-
-import React, { useState, useEffect,useContext,useRef} from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
   chatActiveContact,
   chatMessages,
   loggedInUser,
 } from "../../atom/globalState";
+<<<<<<< HEAD
  import { ToastContainer, toast } from 'react-toastify';
 import ThreeDots from '../ChatPage/ThreeDots'
   import 'react-toastify/dist/ReactToastify.css';
+=======
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+>>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
 import classes from "./chatContent.module.css";
 import Avatar from "../ChatPage/Avatar";
-import AuthContext from '../store/auth-context'
+import AuthContext from "../store/auth-context";
 import ChatItem from "./ChatItem";
 import axios from "axios";
-import { message } from "antd";
-import {PushToTalkButton,PushToTalkButtonContainer,ErrorPanel} from '@speechly/react-ui'
-import {useSpeechContext} from '@speechly/react-client'
-var stompClient=null;
-var counter=0;
+import {
+  PushToTalkButton,
+} from "@speechly/react-ui";
+import { useSpeechContext } from "@speechly/react-client";
+var stompClient = null;
+var counter = 0;
 const ChatContent = (props) => {
-   const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef(null);
   const authCtx = useContext(AuthContext);
   const currentUser = useRecoilValue(loggedInUser);
-  const[deletemsgid,setdeletemsgid]=useState(-1);
-  const [messagestate,setmessagestate]=useState('');
+  const [deletemsgid, setdeletemsgid] = useState(-1);
+  const [messagestate, setmessagestate] = useState("");
   const [messages, setMessages] = useRecoilState(chatMessages);
   const [activeContact, setActiveContact] = useRecoilState(chatActiveContact);
-  const [contacts, setContacts] = useState([]);
-  const {segment} =useSpeechContext();
-  
+  const { segment } = useSpeechContext();
+
   useEffect(() => {
-    return () => {
-      
-    };
-  }, [])
+    return () => {};
+  }, []);
+  useEffect(() => {}, [messages]);
+
   useEffect(() => {
-    
-  }, [messages])
-    
+    if (localStorage.getItem("token") !== null) {
+      stompClient == null && connect();
+    }
+  }, [authCtx.isLoggedIn]);
   useEffect(() => {
-   if (localStorage.getItem("token") !== null) {
-    stompClient==null&&connect();
-  }
-  }, [authCtx.isLoggedIn])
-  useEffect(() => {
+<<<<<<< HEAD
     if (localStorage.getItem("token") !== null&&props.index!=-1&&props.index!==-4) {
    setActiveContact({name:props.nameofperson,email:authCtx.users[props.index].username})
    setmessagestate('');
   }
   }, [props.nameofperson,props.index])
+=======
+    if (localStorage.getItem("token") !== null && props.index != -1) {
+      setActiveContact({
+        name: props.nameofperson,
+        email: authCtx.users[props.index].username,
+      });
+    }
+  }, [props.nameofperson, props.index]);
+>>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
   useEffect(() => {
     if (activeContact === undefined) {
       return;
@@ -66,21 +77,20 @@ const ChatContent = (props) => {
         },
       })
       .then((response) => {
-        
         setMessages(response.data);
       });
-  }, [activeContact.name,deletemsgid]);
-   const scrollToBottom = () => {
-   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [activeContact.name, deletemsgid]);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    scrollToBottom()
+    scrollToBottom();
   }, [messages]);
   const connect = () => {
     const Stomp = require("stompjs");
     var SockJS = require("sockjs-client");
     SockJS = new SockJS("https://chat-lg.azurewebsites.net/ws");
-    stompClient=Stomp.over(SockJS);
+    stompClient = Stomp.over(SockJS);
     stompClient.connect({}, onConnected, onError);
   };
   const onConnected = () => {
@@ -91,24 +101,22 @@ const ChatContent = (props) => {
   };
   const onError = (err) => {
     window.alert("YES");
-    
   };
   const changeinstate = (e) => {
     setmessagestate(e.target.value);
   };
   const onMessageReceived = (msg) => {
-  
     const notification = JSON.parse(msg.body);
-    const active = JSON.parse(sessionStorage.getItem("recoil-persist"))
-      .chatActiveContact;
-    
+    const active = JSON.parse(
+      sessionStorage.getItem("recoil-persist")
+    ).chatActiveContact;
+
     if (active.email === notification.senderId) {
       const url =
         "https://chat-lg.azurewebsites.net/messages/" +
         notification.senderId +
         "/" +
-        currentUser.username
-        ;
+        currentUser.username;
       axios
         .get(url, {
           headers: {
@@ -119,76 +127,82 @@ const ChatContent = (props) => {
           // const newMessages = JSON.parse(
           //   sessionStorage.getItem("recoil-persist")
           // ).chatMessages;
-         
-        setMessages(message.data);
-         
-          
+
+          setMessages(message.data);
+
           scrollToBottom();
         });
     } else {
-     
-      toast.info('Received a new message from ' + notification.senderName, {
-position: "top-center",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-});
-    
-    
+      toast.info("Received a new message from " + notification.senderName, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
+<<<<<<< HEAD
   const [showthreedots,setshowthreedots]=useState(false);
   const clicked=()=>{
     setshowthreedots((p)=>!p)
     // props.setindexfunc(-4);
   }
   
+=======
+
+>>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
   const sendMessage = () => {
     if (messagestate.trim() !== "") {
-      
-     
       const message = {
         senderId: currentUser.username,
         recipientId: activeContact.email,
         senderName: currentUser.firstName,
         recipientName: activeContact.name,
         content: messagestate,
-        timestamp:new Date(),
+        timestamp: new Date(),
       };
       stompClient.send("/app/chat", {}, JSON.stringify(message));
-      
+
       const newMessages = [...messages];
       newMessages.push(message);
       setMessages(newMessages);
 
       scrollToBottom();
+<<<<<<< HEAD
       setmessagestate('');
     }
 
     
+=======
+      setmessagestate("");
+    } else {
+      window.alert("Cant submit empty message"); //khaali msg not allowed
+    }
+>>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
   };
-  const logouthandler=()=>{
+  const logouthandler = () => {
     authCtx.logout();
-  }
-  useEffect(()=>{
-    if(deletemsgid!=-1)
-    {
-    }
-  },[deletemsgid])
-  
+  };
   useEffect(() => {
-    if(segment&&segment.isFinal)
-    {
-      setmessagestate((prev)=>prev+" "+segment.words.map((w)=>w.value).join(" "));
+    if (deletemsgid != -1) {
     }
-  }, [segment])
-  const profilesectionhandler=()=>{
+  }, [deletemsgid]);
+
+  useEffect(() => {
+    if (segment && segment.isFinal) {
+      setmessagestate(
+        (prev) => prev + " " + segment.words.map((w) => w.value).join(" ")
+      );
+    }
+  }, [segment]);
+  const profilesectionhandler = () => {
     //take to profile page of this person (props.nameofperson)
 
     props.setindexfunc(-3);
+<<<<<<< HEAD
   }
   const profilesectionhandler2=()=>{
     console.log("dddddddddddddddddddddddddddd");
@@ -240,39 +254,78 @@ progress: undefined,
                currentUser={currentUser.username}
                setdeletemsgid={setdeletemsgid}
                deletemsgid={deletemsgid}
+=======
+  };
+  const onKeyDownHandler = (e) => {
+    if (e.keyCode === 13) sendMessage();
+  };
+  return (
+    <div className={classes.main__chatcontent}>
+      <div className={classes.content__header}>
+        <div className={classes.blocks}>
+          <div className={classes["current-chatting-user"]}>
+            <Avatar
+              isOnline="active"
+              image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+>>>>>>> 177728965a36f394dc6e94d70f244b0c0f41e53c
             />
+            <div onClick={profilesectionhandler}>{props.nameofperson}</div>
+          </div>
+        </div>
 
-          );
-         })}
+        <div className={classes.blocks}>
+          <div className={classes.settings}>
+            <button className={classes["btn-nobg"]} onClick={logouthandler}>
+              LOGOUT
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className={classes.content__body}>
+        <div className={classes.chat__items}>
+          {messages.map((itm, index) => {
+            return (
+              <ChatItem
+                key={index}
+                animationDelay={index + 2}
+                id={itm.id}
+                user={itm.type ? itm.type : "me"}
+                msg={itm.content}
+                timestamp={itm.timestamp}
+                sender={itm.senderId}
+                currentUser={currentUser.username}
+                setdeletemsgid={setdeletemsgid}
+                deletemsgid={deletemsgid}
+              />
+            );
+          })}
 
-         <div ref={messagesEndRef} />
-       </div>
-     </div>
-     <div className={classes.content__footer}  >
-       <div className={classes.sendNewMessage}>
-        
-         <input
-           type="text"
-          placeholder="Type a message here"
-          onKeyDown={onKeyDownHandler}
-           onChange={changeinstate}
-           value={messagestate}
-        />
+          <div ref={messagesEndRef} />
+        </div>
+      </div>
+      <div className={classes.content__footer}>
+        <div className={classes.sendNewMessage}>
+          <input
+            type="text"
+            placeholder="Type a message here"
+            onKeyDown={onKeyDownHandler}
+            onChange={changeinstate}
+            value={messagestate}
+          />
 
-      
-        <PushToTalkButton intro="" tapToTalkTime="60000" size="2.5rem" />
-        
-        
-        <button className={classes.btnSendMsg} id="sendMsgBtn" onClick={sendMessage}>
-           <i className="fa fa-paper-plane"></i>
-         </button>
-       </div>
-     </div>
-     
+          <PushToTalkButton intro="" tapToTalkTime="60000" size="2.5rem" />
 
-
-   </div>
-   );
- };
+          <button
+            className={classes.btnSendMsg}
+            id="sendMsgBtn"
+            onClick={sendMessage}
+          >
+            <i className="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ChatContent;
