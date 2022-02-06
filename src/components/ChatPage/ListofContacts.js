@@ -1,21 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
+
+import React, { useEffect,Component,useState,useContext} from "react";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import {
+  chatActiveContact,
+  chatMessages,
   loggedInUser,
 } from "../../atom/globalState";
 import classes from "./ListofContacts.module.css";
-import ChatListItems from "./ChatListItems";
-import "font-awesome/css/font-awesome.min.css";
-import AuthContext from "../store/auth-context";
-import { toast } from "react-toastify";
+import ChatListItems from './ChatListItems'
+import 'font-awesome/css/font-awesome.min.css';
+import AuthContext from '../store/auth-context'
+import { ToastContainer, toast } from 'react-toastify';
 
-import "react-toastify/dist/ReactToastify.css";
-const allChatUsers = [];
-const ChatList = (props) => {
+  import 'react-toastify/dist/ReactToastify.css';
+const allChatUsers = [
+  ];
+const ChatList=(props)=> {
+  
+        
+        
+        
   const authCtx = useContext(AuthContext);
   const currentUser = useRecoilValue(loggedInUser);
-
  
   const [allChats,setallChats]=useState(allChatUsers);
   const [deleteuserid,setdeleteuserid]=useState(-1);
@@ -24,15 +31,13 @@ const ChatList = (props) => {
     console.log("load");
     console.log(currentUser);
     axios
-      .get(
-        "https://chat-lg.azurewebsites.net/contacts/" + currentUser.username,
-        {
-          headers: {
-            Authorization: "Bearer" + authCtx.token,
-          },
-        }
-      )
+      .get("https://chat-lg.azurewebsites.net/contacts/"+currentUser.username, {
+        headers: {
+          Authorization: "Bearer" + authCtx.token,
+        },
+      })
       .then((response) => {
+       
         setallChats(response.data);
         authCtx.setuserhandler(response.data);
       });
@@ -40,14 +45,14 @@ const ChatList = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       loadContacts();
+
     }
   }, [authCtx.isLoggedIn]);
-  const setsearchvalfunc = (e) => {
-    setsearchval(e.target.value);
-  };
-  const addnewuser = () => {
+  const setsearchvalfunc=(e)=>{
+      setsearchval(e.target.value);
+  }
+  const addnewuser=()=>{
     props.adduserindex();
-
   }
  const setempty=()=>
  {
@@ -74,15 +79,30 @@ const ChatList = (props) => {
     axios
       .post("https://chat-lg.azurewebsites.net/contacts/"+currentUser.username,props.updatecontacts)
       .then((response) => {
-
+        
+      
         props.setindexfunc(-1);
-      }
+       loadContacts();
+      })
+      .catch((err) => {
+       window.alert(err.message);
+      });
     }
-  }, [props.updatecontacts]);
-  useEffect(() => {
-    if (deleteuserid != -1) {
+    else 
+    {
+       toast.error('User Already Exists In Contact', {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+       props.setindexfunc(-1);
     }
 
+    }
     },[props.updatecontacts]);
  useEffect(()=>{
    if(deleteuserid!=-1)
@@ -138,44 +158,8 @@ const ChatList = (props) => {
             );
           })}
 
-
         </div>
       </div>
-      <div className={classes.chatlist__items}>
-        {allChats.length > 0 &&
-          allChats
-            .filter((val) => {
-              if (searchval === "") {
-                return val;
-              } else if (
-                val.firstName.toLowerCase().includes(searchval.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((item, index) => {
-              return (
-                <ChatListItems
-                  setpersonfunc={props.setpersonfunc}
-                  key={index}
-                  setindexfunc={props.setindexfunc}
-                  name={item.firstName}
-                  userName={item.username}
-                  lastName={item.lastName}
-                  curindex={props.curindex}
-                  setindexwithname={props.setindexwithname}
-                  index={index}
-                  animationDelay={index + 1}
-                  active={item.active ? "active" : ""}
-                  isOnline={item.isOnline ? "active" : ""}
-                  image={item.image}
-                  deleteuserid={deleteuserid}
-                  setdeleteuserid={setdeleteuserid}
-                />
-              );
-            })}
-      </div>
-    </div>
-  );
-};
-export default ChatList;
+    );
+  }
+  export default ChatList;

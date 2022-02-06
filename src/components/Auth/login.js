@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 import classes from "./login.module.css";
 import { loggedInUser } from "../../atom/globalState";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 
-import "react-toastify/dist/ReactToastify.css";
+  import 'react-toastify/dist/ReactToastify.css';
 import "font-awesome/css/font-awesome.min.css";
 const Login = () => {
   const [login, setlogin] = useState(false);
@@ -31,14 +31,14 @@ const Login = () => {
   const submitHandlerSignup = (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     const userData = {
       username: emailName.current.value,
       firstName: firstName.current.value,
       lastName: lastName.current.value,
       password: passwordsignup.current.value,
     };
-
+    
     axios
       .post("https://chat-lg.azurewebsites.net/register", userData)
       .then((response) => {
@@ -71,30 +71,30 @@ progress: undefined,
   const submitHandlerLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     const userData = {
       username: userName.current.value,
       password: password.current.value,
     };
-
+   
     axios
       .post("https://chat-lg.azurewebsites.net/authenticate", userData)
       .then((response) => {
         authCtx.login(response.data.token);
-
+        
         localStorage.setItem("token", response.data.token);
         console.log(response.data.user);
         setCurrentUser(response.data.user);
-        toast.success("Successfully Logged In", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-
+         toast.success('Successfully Logged In', {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+       
         setLoading(false);
         history.replace("/chatpage");
       })
