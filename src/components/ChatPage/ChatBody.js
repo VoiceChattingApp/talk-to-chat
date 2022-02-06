@@ -12,6 +12,7 @@ import Newuserprofile from '../userProfile/Newuserprofile'
 import Adduser from './Adduser'
 import Logout from '../chatsection/Logout'
 import AuthContext from '../store/auth-context';
+import ThreeDots from './ThreeDots'
 const ChatBody=()=> {
   
 	const [nameofperson,setnameofperson]=useState('');
@@ -29,7 +30,7 @@ const ChatBody=()=> {
     }, [])
       
 	  const setpersonfunc=(e)=>{
-      setnameofperson(e.target.innerText);
+      setnameofperson(e);
     }
     const setemailfunc=(e)=>{
       setemail(e.target.innerText);
@@ -51,12 +52,13 @@ const ChatBody=()=> {
 	return (
 	<div className={classes.main__chatbody}>
         <ListofContacts setindexwithname={setindexwithname} updatecontacts={updatecontacts} adduserindex={setuserindex} setpersonfunc={setpersonfunc} curindex={index} setemailfunc={setemailfunc} setindexfunc={setindexfunc}/>
-        {index===-1&&<Logout />}
+        
         {index===-3&&<Newuserprofile curindex={index} user={indexwithname} />}
         
-        {index!==-1&&index!==-2&&index!==-3&&<ChatContent setindexfunc={setindexfunc} nameofperson={nameofperson} email={email} index={index}/>}
-        {index===-2&&<Adduser curindex={index} setindexfunc={setindexfunc} setupdatecontacts={setupdatecontacts}/>}
+        {index!==-1&&index!==-2&&index!==-3&&<ChatContent setindexfunc={setindexfunc} nameofperson={nameofperson} email={email} index={index} setindexwithname={setindexwithname}/>}
         
+        {index===-2&&<Adduser curindex={index} setindexfunc={setindexfunc} setupdatecontacts={setupdatecontacts}/>}
+        {index===-4&&<ThreeDots/>}
       </div>
 	)
 }

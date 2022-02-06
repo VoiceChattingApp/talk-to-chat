@@ -7,7 +7,7 @@ import {
   loggedInUser,
 } from "../../atom/globalState";
  import { ToastContainer, toast } from 'react-toastify';
-
+import ThreeDots from '../ChatPage/ThreeDots'
   import 'react-toastify/dist/ReactToastify.css';
 import classes from "./chatContent.module.css";
 import Avatar from "../ChatPage/Avatar";
@@ -45,8 +45,9 @@ const ChatContent = (props) => {
   }
   }, [authCtx.isLoggedIn])
   useEffect(() => {
-    if (localStorage.getItem("token") !== null&&props.index!=-1) {
+    if (localStorage.getItem("token") !== null&&props.index!=-1&&props.index!==-4) {
    setActiveContact({name:props.nameofperson,email:authCtx.users[props.index].username})
+   setmessagestate('');
   }
   }, [props.nameofperson,props.index])
   useEffect(() => {
@@ -139,7 +140,12 @@ progress: undefined,
     
     }
   };
- 
+  const [showthreedots,setshowthreedots]=useState(false);
+  const clicked=()=>{
+    setshowthreedots((p)=>!p)
+    // props.setindexfunc(-4);
+  }
+  
   const sendMessage = () => {
     if (messagestate.trim() !== "") {
       
@@ -161,10 +167,8 @@ progress: undefined,
       scrollToBottom();
       setmessagestate('');
     }
-    else 
-    {
-      window.alert("Cant submit empty message");//khaali msg not allowed
-    }
+
+    
   };
   const logouthandler=()=>{
     authCtx.logout();
@@ -183,7 +187,15 @@ progress: undefined,
   }, [segment])
   const profilesectionhandler=()=>{
     //take to profile page of this person (props.nameofperson)
+
     props.setindexfunc(-3);
+  }
+  const profilesectionhandler2=()=>{
+    console.log("dddddddddddddddddddddddddddd");
+    console.log(loggedInUser);
+    console.log(chatActiveContact);
+    props.setindexwithname({username:currentUser.username,firstName:currentUser.firstName,lastName:currentUser.lastName});
+    profilesectionhandler();
   }
   const onKeyDownHandler=(e)=>{
     if(e.keyCode===13)
@@ -206,10 +218,9 @@ progress: undefined,
 
        <div className={classes.blocks}>
          <div className={classes.settings}>
-          <button className={classes['btn-nobg']} onClick={logouthandler}>
-             LOGOUT
-           </button>
-           
+          
+            <i className="fa fa-ellipsis-v" aria-hidden="true" style={{color:"white",cursor:"pointer"}} onClick={clicked}></i>
+            {showthreedots&&<ThreeDots clickedprofileoption={profilesectionhandler2}/>}
          </div>
        </div>
      </div>

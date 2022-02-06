@@ -68,7 +68,7 @@
 .cardmargin{
  background-color: #f4f3f3;
  
- height: 80%;
+ 
  max-width: 40%;
  min-width: 40%;
  margin-top: 5%;
@@ -82,7 +82,24 @@
   max-width: 75%;
 }
 .buttonflex{
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background-color: #ff4b2b;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
   max-width: 60%;
+  margin-bottom: 10px;
+}
+.buttonflex:hover {
+  background-color: transparent;
+  color: red;
+  border-radius: 1px solid red;
 }
 .card-background{
  background: linear-gradient(to right, #009688, #4CAF50);
@@ -109,14 +126,40 @@
  top: 100px;
  border: 6px solid #f4f3f3;
 }
-
+.maxheight{
+  width: 100%;
+}
 .card-info{
   padding: 10px;
-  margin-top: 25%;
+  margin-top: 15%;
+
+}
+.card-info input{
+  border:none;
 }
 .card-info-margin{
   padding: 10px;
   margin-top: 15%;
+
+}
+.para-fullwidth{
+  width: 100%;
+}
+.para-seven{
+  width: 80%;
+}
+.card-info-margin button{
+  
+  margin-top: 15%;
+
+}
+.card-info input ,.card-info-margin input{
+  background-color: transparent;
+  border:none;
+
+}
+.card-info-margin input{
+  width:70%;
 }
 
 .fab{
@@ -144,6 +187,9 @@
   align-items: center;
   justify-content: center;
 
+}
+.card-info .buttonflex {
+  margin-top: 0%;
 }
 .container{
   height: 300px;

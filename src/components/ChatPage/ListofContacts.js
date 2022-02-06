@@ -28,6 +28,8 @@ const ChatList=(props)=> {
   const [deleteuserid,setdeleteuserid]=useState(-1);
   const [searchval,setsearchval]=useState('');
    const loadContacts = () => {
+    console.log("load");
+    console.log(currentUser);
     axios
       .get("https://chat-lg.azurewebsites.net/contacts/"+currentUser.username, {
         headers: {
@@ -52,7 +54,10 @@ const ChatList=(props)=> {
   const addnewuser=()=>{
     props.adduserindex();
   }
- 
+ const setempty=()=>
+ {
+  setsearchval("");
+ }
  useEffect(()=>{
   if(props.updatecontacts.username.length>0)
   {
@@ -70,6 +75,7 @@ const ChatList=(props)=> {
    //paste the func of adding to the database the props.updateuser and the call loadcontacts();
    if(j===0)
    {
+    console.log("j==0");
     axios
       .post("https://chat-lg.azurewebsites.net/contacts/"+currentUser.username,props.updatecontacts)
       .then((response) => {
@@ -115,7 +121,9 @@ progress: undefined,
         </div>
         <div className={classes.chatList__search}>
           <div className={classes.search_wrap}>
-            <input type="text" placeholder="Search Here" onChange={setsearchvalfunc} required />
+           {searchval.length>0&&<i className="fa fa-times" style={{paddingLeft:"5%"}} onClick={setempty}></i>}
+            <input type="text" placeholder="Search Here" onChange={setsearchvalfunc} required value={searchval} />
+
             <button className={classes.searchbtn}>
               <i className="fa fa-search"></i>
             </button>

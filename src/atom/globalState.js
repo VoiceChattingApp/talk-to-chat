@@ -7,6 +7,7 @@ export const loggedInUser = atom({
     type: "loggedInUser",
   },
   dangerouslyAllowMutability:true
+ 
 });
 
 export const chatActiveContact = atom({

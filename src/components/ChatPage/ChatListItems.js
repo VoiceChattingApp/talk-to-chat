@@ -26,7 +26,7 @@ const ChatListItems=(props)=> {
   }
   const handlesubmission=(e)=>{
     //props.setpersonfunc
-    props.setpersonfunc(e);
+    props.setpersonfunc(`${props.name+' '+props.lastName}`);
     props.setindexwithname({username:props.userName,firstName:props.name,lastName:props.lastName});
   }
     return (

@@ -44,7 +44,7 @@ const Login = () => {
       .then((response) => {
         toast.success('User created successfully!!! Check your email to verify your email address', {
 position: "top-center",
-autoClose: 5000,
+autoClose: 2000,
 hideProgressBar: false,
 closeOnClick: true,
 pauseOnHover: true,
@@ -57,7 +57,7 @@ progress: undefined,
       .catch((err) => {
         toast.error('Error in creating user', {
 position: "top-center",
-autoClose: 5000,
+autoClose: 2000,
 hideProgressBar: false,
 closeOnClick: true,
 pauseOnHover: true,
@@ -83,6 +83,7 @@ progress: undefined,
         authCtx.login(response.data.token);
         
         localStorage.setItem("token", response.data.token);
+        console.log(response.data.user);
         setCurrentUser(response.data.user);
          toast.success('Successfully Logged In', {
 position: "top-center",
@@ -100,7 +101,7 @@ progress: undefined,
       .catch((err) => {
         toast.error('Invalid username or password!', {
 position: "top-center",
-autoClose: 5000,
+autoClose: 2000,
 hideProgressBar: false,
 closeOnClick: true,
 pauseOnHover: true,

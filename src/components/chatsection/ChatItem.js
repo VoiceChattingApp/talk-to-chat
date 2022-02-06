@@ -62,7 +62,7 @@ const ChatItem=(props)=> {
     {
       mainhours+=hours.toString();
     } 
-    console.log(props.user);
+    
     return (
       <div className={`${classes.chat__item} ${props.sender!==props.currentUser? classes.other:" "}`}>
         <div className={classes.chat__item__content}>

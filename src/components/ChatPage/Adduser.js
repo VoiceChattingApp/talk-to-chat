@@ -36,7 +36,11 @@ const Adduser=(props)=> {
       
       setsearchval(e.target.value);
   }
-  
+  const setempty=()=>
+ {
+  setsearchval("");
+ }
+ const [wrongval,setwrongval]=useState(false);
   const submithandler=(e)=>{
     
     e.preventDefault();
@@ -66,7 +70,7 @@ const Adduser=(props)=> {
        
         
       });
-   
+    setwrongval(false);
     setsearchval('');
   }
   else 
@@ -81,6 +85,7 @@ pauseOnHover: true,
 draggable: true,
 progress: undefined,
 });
+     setwrongval(true);
      setnodata(false);
     return;
   }
@@ -102,6 +107,7 @@ progress: undefined,
         <div className={classes.form} >
         <div className={classes.chatList__search}>
           <div className={classes.search_wrap}>
+            {searchval.length>0&&<i className="fa fa-times" style={{paddingLeft:"5%"}} onClick={setempty}></i>}
             <input type="email" placeholder="Search Here" value={searchval} onChange={setsearchvalfunc} required /> 
             <button className={classes.searchbtn} onClick={submithandler}>
               <i className="fa fa-search" style={{color:"white"}}></i>
@@ -113,7 +119,7 @@ progress: undefined,
        </div>
        </form>
        <div className={classes.thirddiv}>
-       {user.username.length>0&&<Newuserprofile setindexfunc={props.setindexfunc} curindex={props.curindex} user={user} updatecontacts={updatecontacts}/>}
+       {user.username.length>0&&wrongval===false&&<Newuserprofile setindexfunc={props.setindexfunc} curindex={props.curindex} user={user} updatecontacts={updatecontacts}/>}
        {user.username.length===0&&nodata&&<NoUserProfile/>}
        </div>
       </div>

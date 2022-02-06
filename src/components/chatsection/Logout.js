@@ -1,7 +1,8 @@
 import React, { useState, useEffect,useContext,useRef} from "react";
 import classes from "./chatContent.module.css";
 import AuthContext from '../store/auth-context'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faTrash } from '@fortawesome/free-solid-svg-icons'
 const Logout = () => {
     const authCtx = useContext(AuthContext);
     const logouthandler=()=>{
@@ -15,13 +16,15 @@ const Logout = () => {
           
         </div>
        </div>
+       
        <div className={classes.blocks}>
          <div className={classes.settings}>
           <button className={classes['btn-nobg']} onClick={logouthandler}>
-             LOGOUT
+             LOGGING
            </button>
            
          </div>
+         <i className="fa fa-ellipsis-v" aria-hidden="true" style={{color:"blue"}}></i>
        </div>
      </div>
      </div>

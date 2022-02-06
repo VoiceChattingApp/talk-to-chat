@@ -43,6 +43,15 @@
    color: white;
   
 }
+.current-chatting-user div:hover{
+  font-size:20px;
+  text-align:center; 
+   
+  text-transform:uppercase;
+ 
+   color: white;
+  
+}
 .current-chatting-user p {
   margin: 0;
   font-weight: 600;
@@ -155,7 +164,7 @@
 .content__footer {
   position: absolute;
   padding-top: 20px;
-  bottom: 10px;
+  bottom: 3px;
   right: 40px;
   width: 90%;
   background-color: transparent;
