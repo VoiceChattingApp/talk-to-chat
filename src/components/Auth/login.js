@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 import classes from "./login.module.css";
 import { loggedInUser } from "../../atom/globalState";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-  import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "font-awesome/css/font-awesome.min.css";
 const Login = () => {
   const [login, setlogin] = useState(false);
@@ -16,7 +16,6 @@ const Login = () => {
   };
   const [currentUser, setCurrentUser] = useRecoilState(loggedInUser);
   const history = useHistory();
-  const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const firstName = useRef();
   const lastName = useRef();
@@ -25,90 +24,90 @@ const Login = () => {
   const emailName = useRef();
   const passwordsignup = useRef();
   const authCtx = useContext(AuthContext);
-  const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
-  };
   const submitHandlerSignup = (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const userData = {
       username: emailName.current.value,
       firstName: firstName.current.value,
       lastName: lastName.current.value,
       password: passwordsignup.current.value,
     };
-    
+
     axios
       .post("https://chat-lg.azurewebsites.net/register", userData)
       .then((response) => {
-        toast.success('User created successfully!!! Check your email to verify your email address', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-});
-       
+        toast.success(
+          "User created successfully!!! Check your email to verify your email address",
+          {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+
         setLoading(false);
       })
       .catch((err) => {
-        toast.error('Error in creating user', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-});
-        
+        toast.error("Error in creating user", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
         setLoading(false);
       });
   };
   const submitHandlerLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const userData = {
       username: userName.current.value,
       password: password.current.value,
     };
-   
+
     axios
       .post("https://chat-lg.azurewebsites.net/authenticate", userData)
       .then((response) => {
         authCtx.login(response.data.token);
-        
+
         localStorage.setItem("token", response.data.token);
         console.log(response.data.user);
         setCurrentUser(response.data.user);
-         toast.success('Successfully Logged In', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-});
-       
+        toast.success("Successfully Logged In", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
         setLoading(false);
         history.replace("/chatpage");
       })
       .catch((err) => {
-        toast.error('Invalid username or password!', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-});
-        
+        toast.error("Invalid username or password!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
         setLoading(false);
       });
   };
