@@ -82,6 +82,7 @@ const Login = () => {
         authCtx.login(response.data.token);
 
         localStorage.setItem("token", response.data.token);
+        
         console.log(response.data.user);
         setCurrentUser(response.data.user);
         toast.success("Successfully Logged In", {

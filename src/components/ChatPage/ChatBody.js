@@ -57,7 +57,7 @@ const ChatBody = () => {
         setemailfunc={setemailfunc}
         setindexfunc={setindexfunc}
       />
-
+      
       {index === -3 && <Newuserprofile curindex={index} user={indexwithname} />}
 
       {index !== -1 && index !== -2 && index !== -3 && (
@@ -67,6 +67,7 @@ const ChatBody = () => {
           email={email}
           index={index}
           setindexwithname={setindexwithname}
+          indexwithname={indexwithname}
         />
       )}
 

@@ -10,19 +10,24 @@ const Newuserprofile = (props) => {
   const [showpara, setshowpara] = useState(false);
   const inputRef = useRef(null);
   const currentUser = useRecoilValue(loggedInUser);
-  const [image, setimage] = useState();
+  const [image, setimage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
   // "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
   useEffect(() => {
     if (showpara) inputRef.current.focus();
-    var url = "http://localhost:8081/photos/" + currentUser.username;
+   
+    
+    var url = "https://chat-lg.azurewebsites.net/photos/" + props.user.username;
     axios
       .get(url)
       .then((result) => {
         console.log(result.data);
-        setimage(result.data);
+        
+        setimage(`data:image/png;base64,${result.data}`);
       })
-      .catch((err) => {});
-  }, [showpara, currentUser.username]);
+      .catch((err) => {console.log("ERROR IN GET")
+        setimage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")});
+    
+  }, [props.user.username]);
   const submithandler = () => {
     props.updatecontacts(props.user);
   };
@@ -41,7 +46,7 @@ const Newuserprofile = (props) => {
     console.log("-----------------------------------------");
     console.log(file);
     console.log("-----------------------------------------");
-    var url = "http://localhost:8081/photos/" + currentUser.username;
+    var url = "https://chat-lg.azurewebsites.net/photos/" + currentUser.username;
     let formdata = new FormData();
     formdata.append("image", file);
     axios
@@ -93,7 +98,7 @@ const Newuserprofile = (props) => {
             className={classes["img-holder"]}
             style={{
               backgroundImage: `url(${image})`,
-
+              objectFit:"fill",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}

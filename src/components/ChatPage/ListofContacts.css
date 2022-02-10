@@ -92,6 +92,8 @@
 }
 .avatar img {
   max-width:100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 
 }
@@ -121,6 +123,9 @@
   
   border-radius: 10px;
 }
+.img{
+  object-fit: cover;
+}
 .isOnline {
   
   width: 10px;
@@ -143,6 +148,7 @@
   overflow: hidden;
   border-radius: 50%;
   width: 100%;
+  object-fit: cover;
   height: 100%;
 }
 .btn {

@@ -57,6 +57,10 @@ const ChatList = (props) => {
           break;
         }
       }
+      if(props.updatecontacts.username===currentUser.username)
+      {
+        j=2;
+      }
 
       //paste the func of adding to the database the props.updateuser and the call loadcontacts();
       if (j === 0) {
@@ -74,8 +78,21 @@ const ChatList = (props) => {
           .catch((err) => {
             window.alert(err.message);
           });
-      } else {
+      } else if(j===1) {
         toast.error("User Already Exists In Contact", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        props.setindexfunc(-1);
+      }
+      else 
+      {
+        toast.error("Can't Add Self to Contacts", {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -92,6 +109,7 @@ const ChatList = (props) => {
     if (deleteuserid != -1) {
     }
   }, [deleteuserid]);
+  const [image,setimage]=useState(null);
   return (
     <div className={classes.main__chatlist}>
       <button className={classes.btn} onClick={addnewuser}>
@@ -136,6 +154,7 @@ const ChatList = (props) => {
               }
             })
             .map((item, index) => {
+              
               return (
                 <ChatListItems
                   setpersonfunc={props.setpersonfunc}
@@ -150,7 +169,7 @@ const ChatList = (props) => {
                   animationDelay={index + 1}
                   active={item.active ? "active" : ""}
                   isOnline={item.isOnline ? "active" : ""}
-                  image={item.image}
+                  image={image}
                   deleteuserid={deleteuserid}
                   setdeleteuserid={setdeleteuserid}
                 />

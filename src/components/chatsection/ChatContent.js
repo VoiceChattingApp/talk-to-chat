@@ -187,6 +187,19 @@ const ChatContent = (props) => {
   const onKeyDownHandler = (e) => {
     if (e.keyCode === 13) sendMessage();
   };
+const[image,setimage]=useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
+ useEffect(()=>{
+  var url = "https://chat-lg.azurewebsites.net/photos/" + props.indexwithname.username;
+    axios
+      .get(url)
+      .then((result) => {
+        console.log(result.data);
+        
+        setimage(`data:image/png;base64,${result.data}`);
+      })
+      .catch((err) => {console.log("ERROR IN GET")
+        setimage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")});
+  },[props.indexwithname.username])
   return (
     <div className={classes.main__chatcontent}>
       <div className={classes.content__header}>
@@ -194,7 +207,7 @@ const ChatContent = (props) => {
           <div className={classes["current-chatting-user"]}>
             <Avatar
               isOnline="active"
-              image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              image={image}
             />
             <div onClick={profilesectionhandler}>{props.nameofperson}</div>
           </div>
