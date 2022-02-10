@@ -10,24 +10,26 @@ const Newuserprofile = (props) => {
   const [showpara, setshowpara] = useState(false);
   const inputRef = useRef(null);
   const currentUser = useRecoilValue(loggedInUser);
-  const [image, setimage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
-  // "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+  const [image, setimage] = useState(
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+  );
   useEffect(() => {
     if (showpara) inputRef.current.focus();
-   
-    
+
     var url = "https://chat-lg.azurewebsites.net/photos/" + props.user.username;
     axios
       .get(url)
       .then((result) => {
         console.log(result.data);
-        
         setimage(`data:image/png;base64,${result.data}`);
       })
-      .catch((err) => {console.log("ERROR IN GET")
-        setimage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")});
-    
-  }, [props.user.username]);
+      .catch((err) => {
+        console.log("ERROR IN GET");
+        setimage(
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+        );
+      });
+  }, [props.user.username, showpara]);
   const submithandler = () => {
     props.updatecontacts(props.user);
   };
@@ -43,17 +45,13 @@ const Newuserprofile = (props) => {
     var file = e.target.files[0];
     if (file && file.type.match("image.*"))
       reader.readAsDataURL(e.target.files[0]);
-    console.log("-----------------------------------------");
-    console.log(file);
-    console.log("-----------------------------------------");
-    var url = "https://chat-lg.azurewebsites.net/photos/" + currentUser.username;
+    var url =
+      "https://chat-lg.azurewebsites.net/photos/" + currentUser.username;
     let formdata = new FormData();
     formdata.append("image", file);
     axios
       .post(url, formdata)
-      .then(() => {
-        console.log("success**********");
-      })
+      .then(() => {})
       .catch((err) => {
         window.alert("Something went wrong");
       });
@@ -98,7 +96,7 @@ const Newuserprofile = (props) => {
             className={classes["img-holder"]}
             style={{
               backgroundImage: `url(${image})`,
-              objectFit:"fill",
+              objectFit: "fill",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
